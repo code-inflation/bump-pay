@@ -1,8 +1,7 @@
 package me.sixhackathon.bumppay.restlayer;
 
 
-import android.util.Log;
-
+import me.sixhackathon.bumppay.paymitObjects.Balance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,7 +16,7 @@ public class BalanceManager {
      */
     public  static  double getBalance(){
 
-        PayMitapiInterface client = ServiceGenerator.createService(PayMitapiInterface.class);
+        PaymitAPIInterface client = ServiceGenerator.createService(PaymitAPIInterface.class);
 
 
         Call<Balance> call = client.getBalance(UserManager.getUserToken());

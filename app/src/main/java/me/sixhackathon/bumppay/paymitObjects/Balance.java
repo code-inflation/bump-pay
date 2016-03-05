@@ -1,4 +1,4 @@
-package me.sixhackathon.bumppay.restlayer;
+package me.sixhackathon.bumppay.paymitObjects;
 
 import java.util.HashMap;
 import java.util.Map;
