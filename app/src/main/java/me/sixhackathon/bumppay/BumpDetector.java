@@ -3,6 +3,11 @@ package me.sixhackathon.bumppay;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.util.Log;
+
+import java.util.Set;
+
+import ch.uepaa.p2pkit.discovery.entity.Peer;
 
 /**
  * Detectes if the device has been bumped
@@ -10,7 +15,13 @@ import android.hardware.SensorEventListener;
 public class BumpDetector implements SensorEventListener {
 
     // Minimum acceleration needed to count as a shake movement
-    private static final int MIN_SHAKE_ACCELERATION = 5;
+    private static final int MIN_BUMP_ACCELERATION = 4;
+
+    // Start time for the bump detection
+    long startTime = 0;
+
+    // Minimum delay between individual bumps in millis
+    private static final long BUMP_DELAY = 200;
 
     // Arrays to store gravity and linear acceleration values
     private float[] mGravity = { 0.0f, 0.0f, 0.0f };
@@ -21,10 +32,9 @@ public class BumpDetector implements SensorEventListener {
     private static final int Y = 1;
     private static final int Z = 2;
 
-    // OnShakeListener that will be notified when the shake is detected
+    // listener that will be notified when the bump is detected
     private OnBumpListener bumpListener;
 
-    // Constructor that sets the shake listener
     public BumpDetector(OnBumpListener bumpListener) {
         this.bumpListener = bumpListener;
     }
@@ -33,20 +43,29 @@ public class BumpDetector implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         // This method will be called when the accelerometer detects a change.
 
-        // Call a helper method that wraps code from the Android developer site
         setCurrentAcceleration(event);
-
-        // Get the max linear acceleration in any direction
         float maxLinearAcceleration = getMaxCurrentLinearAcceleration();
 
         // Check if the acceleration is greater than our minimum threshold
-        if (maxLinearAcceleration > MIN_SHAKE_ACCELERATION) {
+        if (maxLinearAcceleration > MIN_BUMP_ACCELERATION) {
 
-            // It's a bump! Notify the listener.
-            bumpListener.onBump();
+            long now = System.currentTimeMillis();
+
+            if (startTime == 0) {
+                startTime = now;
+            }
+
+            if (now - startTime > BUMP_DELAY) {
+                startTime = 0;
+            } else {
+                // valid bump, find out which peer
+                Log.i(BumpDetector.class.toString(), "Detected valid bump");
+
+                // notify the listener
+                bumpListener.onBump();
             }
         }
-
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
@@ -78,26 +97,22 @@ public class BumpDetector implements SensorEventListener {
          */
     }
 
+    /**
+     * Calculates the max linear acceleration
+     * @return greatest linear acceleration in any direction
+     */
     private float getMaxCurrentLinearAcceleration() {
-        // Start by setting the value to the x value
+
         float maxLinearAcceleration = mLinearAcceleration[X];
 
-        // Check if the y value is greater
         if (mLinearAcceleration[Y] > maxLinearAcceleration) {
             maxLinearAcceleration = mLinearAcceleration[Y];
         }
 
-        // Check if the z value is greater
         if (mLinearAcceleration[Z] > maxLinearAcceleration) {
             maxLinearAcceleration = mLinearAcceleration[Z];
         }
 
-        // Return the greatest value
         return maxLinearAcceleration;
-    }
-
-    // (I'd normally put this definition in it's own .java file)
-    public interface OnBumpListener {
-        public void onBump();
     }
 }
