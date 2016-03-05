@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewPayementActivity" />
-        <activity android:name=".AcceptPayementActivity"></activity>
     </application>
 
 </manifest>
