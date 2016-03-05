@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="me.sixhackathon.bumppay.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:background="@color/common_action_bar_splitter">
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -20,7 +21,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="164dp"
         android:src="@android:drawable/ic_input_add"
-        android:onClick="newPayement" />
+        android:onClick="newPayement"
+        android:tint="@android:color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,18 +36,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="in my purse"
+        android:text="CHF in my wallet"
         android:id="@+id/textView2"
+        android:fontFamily="@string/auth_google_play_services_client_google_display_name"
+        android:layout_marginBottom="80dp"
+        android:textSize="35dp"
         android:layout_above="@+id/add"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="97dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/purseView"
+        android:textSize="85dp"
         android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
