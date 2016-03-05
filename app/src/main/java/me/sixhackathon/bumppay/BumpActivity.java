@@ -141,7 +141,7 @@ public abstract class BumpActivity extends AppCompatActivity {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
-    protected Peer messagePeers(boolean asPayer){
+    protected void messagePeers(boolean asPayer){
 
         accepting = true;
 
@@ -170,7 +170,6 @@ public abstract class BumpActivity extends AppCompatActivity {
                 accepting = false;
             }
         }, 10000);
-        return null;
     }
 
     protected void enableP2PKit() {
