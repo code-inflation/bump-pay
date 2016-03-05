@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import ch.uepaa.p2pkit.P2PKitClient;
+import ch.uepaa.p2pkit.discovery.InfoTooLongException;
 import me.sixhackathon.bumppay.restlayer.BalanceManager;
 import me.sixhackathon.bumppay.restlayer.UserManager;
 
@@ -73,9 +76,18 @@ public class MainActivity extends BumpActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String phoneNumber = txtPhoneNumber.getText().toString();
                         UserManager.signIn(phoneNumber);
+                        resetP2PDiscoveryInfo();
                     }
                 })
                 .show();
+    }
+
+    private void resetP2PDiscoveryInfo(){
+        try {
+            P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo(UserManager.getUserPhoneNumber().getBytes());
+        } catch (InfoTooLongException e) {
+            Log.i(MainActivity.class.toString(), "P2PListener | The discovery info is too long");
+        }
     }
 
     private void updateBalanceUI() {

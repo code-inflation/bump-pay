@@ -66,7 +66,7 @@ public abstract class BumpActivity extends AppCompatActivity {
             P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().addP2pListener(mP2PDiscoveryListener);
 
             try {
-                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo(UserManager.getUserPhoneNumber().getBytes());
+                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo("TO_UPDATE".getBytes());
             } catch (InfoTooLongException e) {
                 Log.i(MainActivity.class.toString(), "P2PListener | The discovery info is too long");
             }
