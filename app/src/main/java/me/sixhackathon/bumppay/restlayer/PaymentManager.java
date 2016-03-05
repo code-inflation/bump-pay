@@ -10,4 +10,8 @@ public class PaymentManager {
     public static String pay(String recieverPhoneNr, Integer amount){
         return "12341234";
     }
+
+    public static void getTransactionInfo(String TransactionID){
+
+    }
 }
