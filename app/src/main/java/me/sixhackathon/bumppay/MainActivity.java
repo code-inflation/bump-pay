@@ -1,12 +1,15 @@
 package me.sixhackathon.bumppay;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -29,6 +32,9 @@ public class MainActivity extends BumpActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        showPhonenrDialog();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,6 +54,25 @@ public class MainActivity extends BumpActivity {
         // initialize p2pkit
         enableP2PKit();
         initializeBumpDetection();
+    }
+
+    private void showPhonenrDialog() {
+        final EditText txtPhoneNumber = new EditText(this);
+
+        // Set the default text to a link of the Queen
+        txtPhoneNumber.setText("+41796550243");
+
+        new AlertDialog.Builder(this)
+                .setTitle("Phone Number")
+                .setMessage("Enter your phone number")
+                .setView(txtPhoneNumber)
+                .setPositiveButton("Paymit login", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String phoneNumber = txtPhoneNumber.getText().toString();
+                        //TODO
+                    }
+                })
+                .show();
     }
 
     private void updateBalanceUI() {
