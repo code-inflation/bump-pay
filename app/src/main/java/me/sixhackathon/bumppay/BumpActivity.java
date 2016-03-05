@@ -32,6 +32,8 @@ public abstract class BumpActivity extends AppCompatActivity {
 
     protected boolean accepting = false;
 
+    protected int bumpAmount;
+
     protected Set<Peer> peers = new HashSet<>();
 
     protected final P2PListener mP2PDiscoveryListener = new P2PListener() {
@@ -110,6 +112,19 @@ public abstract class BumpActivity extends AppCompatActivity {
         });
     }
 
+    protected void initializeBumpDetection(int bumpAmount) {
+        this.bumpAmount = bumpAmount;
+        sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        bumpDetector = new BumpDetector(new OnBumpListener() {
+            @Override
+            public void onBump() {
+                messagePeers();
+                //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
+            }
+        });
+    }
+
     protected Peer messagePeers(){
 
         accepting = true;
@@ -148,5 +163,17 @@ public abstract class BumpActivity extends AppCompatActivity {
         }
 
         P2PKitClient.getInstance(this).getMessageServices().addMessageListener(mMessageListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(bumpDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        sensorManager.unregisterListener(bumpDetector);
+        super.onPause();
     }
 }

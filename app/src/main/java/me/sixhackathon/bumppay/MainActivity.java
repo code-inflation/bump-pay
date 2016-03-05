@@ -58,18 +58,6 @@ public class MainActivity extends BumpActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        sensorManager.registerListener(bumpDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
-    }
-
-    @Override
-    protected void onPause() {
-        sensorManager.unregisterListener(bumpDetector);
-        super.onPause();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
