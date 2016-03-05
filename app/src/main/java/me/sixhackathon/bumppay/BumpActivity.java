@@ -20,7 +20,6 @@ import ch.uepaa.p2pkit.discovery.entity.Peer;
 import ch.uepaa.p2pkit.internal.messaging.MessageTooLargeException;
 import ch.uepaa.p2pkit.messaging.MessageListener;
 import me.sixhackathon.bumppay.restlayer.UserManager;
-import me.sixhackathon.bumppay.util.AsyncMessageRunner;
 import me.sixhackathon.bumppay.util.BumpDetector;
 import me.sixhackathon.bumppay.util.OnBumpListener;
 
@@ -30,15 +29,11 @@ public abstract class BumpActivity extends AppCompatActivity {
     protected SensorManager sensorManager;
     protected BumpDetector bumpDetector;
     protected Sensor accelerometer;
-
     protected boolean accepting = false;
-
     protected int bumpAmount;
     protected int amountToPay;
-    protected String numberOfReciever;
-
+    protected String numberOfReceiver;
     protected Set<Peer> peers = new HashSet<>();
-
     protected final P2PListener mP2PDiscoveryListener = new P2PListener() {
 
         @Override
@@ -99,8 +94,8 @@ public abstract class BumpActivity extends AppCompatActivity {
 
                 String strMessage = new String(message);
                 if (!strMessage.substring(5).equals("")){
-                    numberOfReciever = strMessage.substring(5);
-                    Log.i(BumpActivity.class.toString(), "Number of the reviever is: " + numberOfReciever);
+                    numberOfReceiver = strMessage.substring(5);
+                    Log.i(BumpActivity.class.toString(), "Number of the reviever is: " + numberOfReceiver);
                 }
 
                 // update amount to pay
@@ -119,7 +114,6 @@ public abstract class BumpActivity extends AppCompatActivity {
             @Override
             public void onBump() {
                 messagePeers(false);
-                //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
     }
@@ -131,7 +125,6 @@ public abstract class BumpActivity extends AppCompatActivity {
             @Override
             public void onBump() {
                 messagePeers(true);
-                //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
     }
