@@ -1,5 +1,7 @@
 package me.sixhackathon.bumppay;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -81,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
         } else {
             StatusResultHandling.showAlertDialogForStatusError(this, result);
         }
+
+        SensorManager sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
+        Sensor acc = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        BumpDetector bumpDetector = new BumpDetector(new BumpDetector.OnBumpListener() {
+            @Override
+            public void onBump() {
+                Log.i(MainActivity.class.toString(), "Bump detected!");
+            }
+        });
+        sensorManager.registerListener(bumpDetector, acc, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
