@@ -1,5 +1,6 @@
 package me.sixhackathon.bumppay;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
     private Sensor accelerometer;
 
     private Set<Peer> peers = new HashSet<>();
+
+    private float purse = 10;
+
+    public float getPurse() {
+        return purse;
+    }
+
+    public void setPurse(float purse) {
+        this.purse = purse;
+    }
+
 
     private final P2PListener mP2PDiscoveryListener = new P2PListener() {
 
@@ -98,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        TextView purseContent = (TextView) findViewById(R.id.purseView);
+        purseContent.setText(Float.toString(this.getPurse()));
 
         // initialize p2pkit
         enableP2PKit();
@@ -189,5 +205,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**Called whenever the user clicks the new payement button */
+    public void newPayement (View view){
+        Intent intent = new Intent(this, NewPayementActivity.class);
+        startActivity(intent);
     }
 }

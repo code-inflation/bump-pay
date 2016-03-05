@@ -12,8 +12,40 @@
     tools:context="me.sixhackathon.bumppay.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="164dp"
+        android:src="@android:drawable/ic_input_add"
+        android:onClick="newPayement" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="new payement"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="in my purse"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="97dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/purseView"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp" />
+
 </RelativeLayout>
