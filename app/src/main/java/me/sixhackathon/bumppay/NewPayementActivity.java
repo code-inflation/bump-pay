@@ -1,7 +1,6 @@
 package me.sixhackathon.bumppay;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +28,7 @@ public class NewPayementActivity extends BumpActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Spinner dropdown = (Spinner)findViewById(R.id.b);
-                Integer.parseInt(dropdown.getSelectedItem().toString());
+                bumpAmount = Integer.parseInt(dropdown.getSelectedItem().toString());
             }
 
             @Override

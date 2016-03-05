@@ -66,7 +66,7 @@ public abstract class BumpActivity extends AppCompatActivity {
             P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().addP2pListener(mP2PDiscoveryListener);
 
             try {
-                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo("Hello p2pkit".getBytes());
+                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo("TODO ID".getBytes());
             } catch (InfoTooLongException e) {
                 Log.i(MainActivity.class.toString(), "P2PListener | The discovery info is too long");
             }
@@ -106,7 +106,7 @@ public abstract class BumpActivity extends AppCompatActivity {
         bumpDetector = new BumpDetector(new OnBumpListener() {
             @Override
             public void onBump() {
-                messagePeers();
+                messagePeers(false);
                 //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
@@ -119,27 +119,32 @@ public abstract class BumpActivity extends AppCompatActivity {
         bumpDetector = new BumpDetector(new OnBumpListener() {
             @Override
             public void onBump() {
-                messagePeers();
+                messagePeers(true);
                 //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
     }
 
-    protected Peer messagePeers(){
+    protected Peer messagePeers(boolean asPayer){
 
         accepting = true;
 
+        String message = "[BMP]";
+        if (asPayer){
+            message += bumpAmount;
+        }
+
         for (Peer peer : peers) {
-            // TODO send message to all connected peers
+            // send message to all connected peers
             try {
-                boolean forwarded = P2PKitClient.getInstance(getApplicationContext()).getMessageServices().sendMessage(peer.getNodeId(), "text/plain", "Hello!".getBytes());
+                boolean forwarded = P2PKitClient.getInstance(getApplicationContext()).getMessageServices().sendMessage(peer.getNodeId(), "text/plain", message.getBytes());
                 if (forwarded){
-                    Log.i(MainActivity.class.toString(), "Message sent to " + peer.getNodeId());
+                    Log.i(MainActivity.class.toString(), "Message:" + message + " sent to " + peer.getNodeId());
                 }
             } catch (MessageTooLargeException e) {
                 e.printStackTrace();
             }
-            new AsyncMessageRunner(peer, getApplicationContext()).execute();
+            // new AsyncMessageRunner(peer, getApplicationContext()).execute();
         }
 
         Handler handler = new Handler();
