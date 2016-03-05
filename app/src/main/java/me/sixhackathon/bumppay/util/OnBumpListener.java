@@ -1,4 +1,4 @@
-package me.sixhackathon.bumppay;
+package me.sixhackathon.bumppay.util;
 
 import ch.uepaa.p2pkit.discovery.entity.Peer;
 

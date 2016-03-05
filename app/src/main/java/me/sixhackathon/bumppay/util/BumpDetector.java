@@ -1,13 +1,9 @@
-package me.sixhackathon.bumppay;
+package me.sixhackathon.bumppay.util;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
-
-import java.util.Set;
-
-import ch.uepaa.p2pkit.discovery.entity.Peer;
 
 /**
  * Detectes if the device has been bumped

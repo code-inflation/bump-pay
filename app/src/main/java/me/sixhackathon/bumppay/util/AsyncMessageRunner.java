@@ -1,4 +1,4 @@
-package me.sixhackathon.bumppay;
+package me.sixhackathon.bumppay.util;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,6 +8,7 @@ import android.util.Log;
 import ch.uepaa.p2pkit.P2PKitClient;
 import ch.uepaa.p2pkit.discovery.entity.Peer;
 import ch.uepaa.p2pkit.internal.messaging.MessageTooLargeException;
+import me.sixhackathon.bumppay.MainActivity;
 
 /**
  * Created by robinb on 05.03.2016.
