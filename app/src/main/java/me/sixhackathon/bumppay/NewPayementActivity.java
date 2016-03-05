@@ -56,7 +56,7 @@ public class NewPayementActivity extends BumpActivity {
                 Log.i(NewPayementActivity.class.toString(), "Paying " + amountToPay + " CHF to " + numberOfReceiver);
 
                 Context context = getApplicationContext();
-                CharSequence text = "You just successfully paid"+ amountToPay + " CHF";
+                CharSequence text = "You just successfully paid "+ amountToPay + " CHF";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
