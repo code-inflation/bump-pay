@@ -33,6 +33,7 @@ public abstract class BumpActivity extends AppCompatActivity {
     protected boolean accepting = false;
 
     protected int bumpAmount;
+    protected int amountToPay;
 
     protected Set<Peer> peers = new HashSet<>();
 
@@ -94,10 +95,17 @@ public abstract class BumpActivity extends AppCompatActivity {
 
                 // TODO handle payment acceptment
 
+                amountToPay += bumpAmount;
+
+                // update amount to pay
+                updateAmountToPay();
                 accepting = false;
             }
         }
     };
+
+    protected void updateAmountToPay() {
+    }
 
 
     protected void initializeBumpDetection() {

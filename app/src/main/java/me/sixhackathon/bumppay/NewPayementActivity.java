@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class NewPayementActivity extends BumpActivity {
 
@@ -36,6 +37,12 @@ public class NewPayementActivity extends BumpActivity {
                 bumpAmount = 2;
             }
         });
+    }
+
+    @Override
+    protected void updateAmountToPay(){
+        TextView txt = (TextView)findViewById(R.id.textViewToPay);
+        txt.setText(amountToPay + " CHF");
     }
 
     /** Called when the user clicks the cancel button */
