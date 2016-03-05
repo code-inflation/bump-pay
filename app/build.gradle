@@ -26,4 +26,6 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'ch.uepaa.p2p:p2pkit-android:1.1.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
 }
