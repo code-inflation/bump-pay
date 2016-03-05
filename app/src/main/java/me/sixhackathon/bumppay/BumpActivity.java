@@ -19,6 +19,7 @@ import ch.uepaa.p2pkit.discovery.P2PListener;
 import ch.uepaa.p2pkit.discovery.entity.Peer;
 import ch.uepaa.p2pkit.internal.messaging.MessageTooLargeException;
 import ch.uepaa.p2pkit.messaging.MessageListener;
+import me.sixhackathon.bumppay.restlayer.UserManager;
 import me.sixhackathon.bumppay.util.AsyncMessageRunner;
 import me.sixhackathon.bumppay.util.BumpDetector;
 import me.sixhackathon.bumppay.util.OnBumpListener;
@@ -34,6 +35,7 @@ public abstract class BumpActivity extends AppCompatActivity {
 
     protected int bumpAmount;
     protected int amountToPay;
+    protected String numberOfReciever;
 
     protected Set<Peer> peers = new HashSet<>();
 
@@ -93,9 +95,13 @@ public abstract class BumpActivity extends AppCompatActivity {
             if (accepting){
                 Log.i(MainActivity.class.toString(), "Accepting payment from " + origin);
 
-                // TODO handle payment acceptment
-
                 amountToPay += bumpAmount;
+
+                String strMessage = new String(message);
+                if (!strMessage.substring(5).equals("")){
+                    numberOfReciever = strMessage.substring(5);
+                    Log.i(BumpActivity.class.toString(), "Number of the reviever is: " + numberOfReciever);
+                }
 
                 // update amount to pay
                 updateAmountToPay();
@@ -106,7 +112,6 @@ public abstract class BumpActivity extends AppCompatActivity {
 
     protected void updateAmountToPay() {
     }
-
 
     protected void initializeBumpDetection() {
         sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
@@ -138,8 +143,8 @@ public abstract class BumpActivity extends AppCompatActivity {
         accepting = true;
 
         String message = "[BMP]";
-        if (asPayer){
-            message += bumpAmount;
+        if (!asPayer){
+            message += UserManager.getUserPhoneNumber();
         }
 
         for (Peer peer : peers) {
