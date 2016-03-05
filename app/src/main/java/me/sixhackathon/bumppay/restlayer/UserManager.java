@@ -10,11 +10,13 @@ import retrofit2.Response;
 
 public class UserManager {
 
-    private static String phoneNumber = "+41796550243";
+    private static String phoneNumber;
     private static String userToken;
 
 
     public static void signIn(String number) {
+
+        phoneNumber = number;
         PaymitAPIInterface client = ServiceGenerator.createService(PaymitAPIInterface.class);
 
         Call<SignInBody> call = client.signIn(number);
