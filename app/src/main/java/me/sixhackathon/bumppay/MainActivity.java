@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import me.sixhackathon.bumppay.restlayer.BalanceManager;
 
 public class MainActivity extends BumpActivity {
@@ -51,7 +53,8 @@ public class MainActivity extends BumpActivity {
     private void updateBalanceUI() {
         purse = BalanceManager.getBalance();
         TextView purseContent = (TextView) findViewById(R.id.purseView);
-        purseContent.setText(Double.toString(this.getPurse()));
+        DecimalFormat df = new DecimalFormat("#.00");
+        purseContent.setText(df.format(this.getPurse()));
     }
 
     @Override

@@ -22,7 +22,8 @@
         android:layout_marginBottom="164dp"
         android:src="@android:drawable/ic_input_add"
         android:onClick="newPayement"
-        android:tint="@android:color/white"/>
+        android:tint="@android:color/white"
+        app:backgroundTint="#387b41" />
 
     <TextView
         android:layout_width="wrap_content"
