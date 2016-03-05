@@ -10,7 +10,6 @@ public class PaymentManager {
      * @return TransactionNumber
      */
     public static String pay(String recieverPhoneNr, Integer amount){
-        BalanceManager.addToBalance(amount);
         return "12341234";
     }
 

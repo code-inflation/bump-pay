@@ -26,9 +26,7 @@ public class BalanceManager {
             public void onResponse(Call<Balance> call, Response<Balance> response) {
                 int statusCode = response.code();
                 Balance balance = response.body();
-
                 BalanceManager.balance = balance.getBalance();
-
             }
 
             @Override
@@ -37,11 +35,6 @@ public class BalanceManager {
             }
         });
 
-
         return balance;
-    }
-
-    public static void addToBalance(double amount){
-        balance += amount;
     }
 }
