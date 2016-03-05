@@ -19,7 +19,7 @@ import me.sixhackathon.bumppay.restlayer.UserManager;
 
 public class MainActivity extends BumpActivity {
 
-    private double purse = 0;
+    private double purse = 0.0;
 
     public double getPurse() {
         return purse;
