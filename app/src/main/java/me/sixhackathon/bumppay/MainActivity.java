@@ -15,10 +15,11 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 import me.sixhackathon.bumppay.restlayer.BalanceManager;
+import me.sixhackathon.bumppay.restlayer.UserManager;
 
 public class MainActivity extends BumpActivity {
 
-    private double purse = BalanceManager.getBalance();
+    private double purse = 0;
 
     public double getPurse() {
         return purse;
@@ -33,7 +34,9 @@ public class MainActivity extends BumpActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showPhonenrDialog();
+        if(!UserManager.isLoggedIn()){
+            showPhonenrDialog();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,16 +72,18 @@ public class MainActivity extends BumpActivity {
                 .setPositiveButton("Paymit login", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String phoneNumber = txtPhoneNumber.getText().toString();
-                        //TODO
+                        UserManager.signIn(phoneNumber);
                     }
                 })
                 .show();
     }
 
     private void updateBalanceUI() {
-        purse = BalanceManager.getBalance();
+        if(UserManager.isLoggedIn()){
+            purse = BalanceManager.getBalance();
+        }
         TextView purseContent = (TextView) findViewById(R.id.purseView);
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("0.00");
         purseContent.setText(df.format(this.getPurse()));
     }
 
