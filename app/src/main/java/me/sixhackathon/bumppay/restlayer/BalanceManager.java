@@ -8,7 +8,7 @@ import retrofit2.Response;
 
 public class BalanceManager {
 
-    private static double balance = 83.5; // just for testing purposes
+    private static double balance = 0.0;
 
     /**
      * get the vault balance of the current user
