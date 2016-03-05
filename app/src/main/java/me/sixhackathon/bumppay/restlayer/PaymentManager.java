@@ -1,5 +1,7 @@
 package me.sixhackathon.bumppay.restlayer;
 
+import me.sixhackathon.bumppay.paymitObjects.TransactionInfo;
+
 public class PaymentManager {
     /**
      * Make a transaction to a specific phone number
@@ -11,7 +13,8 @@ public class PaymentManager {
         return "12341234";
     }
 
-    public static void getTransactionInfo(String TransactionID){
-
+    public static TransactionInfo getTransactionInfo(String TransactionID){
+        TransactionInfo info = new TransactionInfo();
+        return info;
     }
 }
