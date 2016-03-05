@@ -14,6 +14,8 @@ public class NewPayementActivity extends BumpActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_payement);
+        TextView textViewToPayLabel = (TextView)findViewById(R.id.textViewToPayLabel);
+        textViewToPayLabel.setVisibility(View.GONE);
 
         Spinner dropdown = (Spinner)findViewById(R.id.b);
 
@@ -41,6 +43,9 @@ public class NewPayementActivity extends BumpActivity {
 
     @Override
     protected void updateAmountToPay(){
+        TextView textViewToPayLabel = (TextView)findViewById(R.id.textViewToPayLabel);
+        textViewToPayLabel.setVisibility(View.VISIBLE);
+
         TextView txt = (TextView)findViewById(R.id.textViewToPay);
         txt.setText(amountToPay + " CHF");
     }
