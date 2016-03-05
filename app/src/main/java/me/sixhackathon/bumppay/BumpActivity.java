@@ -69,7 +69,7 @@ public abstract class BumpActivity extends AppCompatActivity {
             P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().addP2pListener(mP2PDiscoveryListener);
 
             try {
-                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo("TODO ID".getBytes());
+                P2PKitClient.getInstance(getApplicationContext()).getDiscoveryServices().setP2pDiscoveryInfo(UserManager.getUserPhoneNumber().getBytes());
             } catch (InfoTooLongException e) {
                 Log.i(MainActivity.class.toString(), "P2PListener | The discovery info is too long");
             }
@@ -114,8 +114,7 @@ public abstract class BumpActivity extends AppCompatActivity {
     }
 
     protected void initializeBumpDetection() {
-        sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        initSensors();
         bumpDetector = new BumpDetector(new OnBumpListener() {
             @Override
             public void onBump() {
@@ -127,8 +126,7 @@ public abstract class BumpActivity extends AppCompatActivity {
 
     protected void initializeBumpDetection(int bumpAmount) {
         this.bumpAmount = bumpAmount;
-        sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        initSensors();
         bumpDetector = new BumpDetector(new OnBumpListener() {
             @Override
             public void onBump() {
@@ -136,6 +134,11 @@ public abstract class BumpActivity extends AppCompatActivity {
                 //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
+    }
+
+    private void initSensors() {
+        sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     protected Peer messagePeers(boolean asPayer){
