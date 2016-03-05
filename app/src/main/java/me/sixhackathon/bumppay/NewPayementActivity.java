@@ -2,11 +2,15 @@ package me.sixhackathon.bumppay;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import me.sixhackathon.bumppay.restlayer.PaymentManager;
 
 public class NewPayementActivity extends BumpActivity {
 
@@ -37,6 +41,19 @@ public class NewPayementActivity extends BumpActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 bumpAmount = 2;
+            }
+        });
+
+        Button doneButton = (Button)findViewById(R.id.buttonDone);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // handle payment
+                PaymentManager.pay(numberOfReceiver, amountToPay);
+                Log.i(NewPayementActivity.class.toString(), "Paying " + amountToPay + " CHF to " + numberOfReceiver);
+
+                // go back to main activity
+                finish();
             }
         });
     }

@@ -2,17 +2,20 @@ package me.sixhackathon.bumppay;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import me.sixhackathon.bumppay.restlayer.BalanceManager;
+
 public class MainActivity extends BumpActivity {
 
-    private float purse = 10;
+    private double purse = BalanceManager.getBalance();
 
-    public float getPurse() {
+    public double getPurse() {
         return purse;
     }
 
@@ -26,13 +29,29 @@ public class MainActivity extends BumpActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
-        TextView purseContent = (TextView) findViewById(R.id.purseView);
-        purseContent.setText(Float.toString(this.getPurse()));
+
+        updateBalanceUI();
+
+        // ugly hack to update balanceUI periodically
+        final Handler handler = new Handler();
+        handler.postDelayed( new Runnable() {
+
+            @Override
+            public void run() {
+                updateBalanceUI();
+                handler.postDelayed( this, 1000 );
+            }
+        }, 1000 );
 
         // initialize p2pkit
         enableP2PKit();
         initializeBumpDetection();
+    }
+
+    private void updateBalanceUI() {
+        purse = BalanceManager.getBalance();
+        TextView purseContent = (TextView) findViewById(R.id.purseView);
+        purseContent.setText(Double.toString(this.getPurse()));
     }
 
     @Override
