@@ -8,13 +8,13 @@ import retrofit2.Response;
 
 public class BalanceManager {
 
-    private static double balance = 0.0;
+    private static int balance = 0;
 
     /**
      * get the vault balance of the current user
      * @return current vault amount
      */
-    public  static  double getBalance(){
+    public  static int getBalance(){
 
         PaymitAPIInterface client = ServiceGenerator.createService(PaymitAPIInterface.class);
 

@@ -22,13 +22,13 @@ import me.sixhackathon.bumppay.restlayer.UserManager;
 
 public class MainActivity extends BumpActivity {
 
-    private double purse = 0.0;
+    private int purse = 0;
 
-    public double getPurse() {
+    public int getPurse() {
         return purse;
     }
 
-    public void setPurse(float purse) {
+    public void setPurse(int purse) {
         this.purse = purse;
     }
 
