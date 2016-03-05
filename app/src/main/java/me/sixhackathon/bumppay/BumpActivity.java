@@ -26,6 +26,8 @@ import me.sixhackathon.bumppay.util.OnBumpListener;
 public abstract class BumpActivity extends AppCompatActivity {
 
     public static final String APP_KEY = "eyJzaWduYXR1cmUiOiJpNSs1MHNZT1dTNVhlcFlOck9LNnJhNS9raGVneDVnMVZRK3owb2J4akRWUXMzL295T3ExWVJwa21VL0JDZWNnY21KM1JSbTlRU1hUY1hzMWVUdVJnbGp4blNLRGdocVMzd1pzWkQwVVIxbUZkbEJONjdiSFZFcHM5b3lkV2FRWXVkOTNxcmg4ZUpTdHI2SFJ1Rnk3TStMeHhlQTVlN0I4dE5jRkNzRlhnQjQ9IiwiYXBwSWQiOjE0NTksInZhbGlkVW50aWwiOjE2OTUxLCJhcHBVVVVJRCI6IkY2OEY0OEE0LUY5MDEtNDRERi05NDk5LTlCRjI0MEMzMkI5NiJ9";
+    public static final int ACCEPTANCE_WINDOW_IN_MILLIS = 10000;
+
     protected SensorManager sensorManager;
     protected BumpDetector bumpDetector;
     protected Sensor accelerometer;
@@ -162,7 +164,7 @@ public abstract class BumpActivity extends AppCompatActivity {
                 // Actions to do after 10 seconds
                 accepting = false;
             }
-        }, 10000);
+        }, ACCEPTANCE_WINDOW_IN_MILLIS);
     }
 
     protected void enableP2PKit() {

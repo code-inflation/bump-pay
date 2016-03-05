@@ -1,34 +1,12 @@
 package me.sixhackathon.bumppay;
 
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
-import ch.uepaa.p2pkit.P2PKitClient;
-import ch.uepaa.p2pkit.P2PKitStatusCallback;
-import ch.uepaa.p2pkit.StatusResult;
-import ch.uepaa.p2pkit.StatusResultHandling;
-import ch.uepaa.p2pkit.discovery.InfoTooLongException;
-import ch.uepaa.p2pkit.discovery.P2PListener;
-import ch.uepaa.p2pkit.discovery.entity.Peer;
-import ch.uepaa.p2pkit.internal.messaging.MessageTooLargeException;
-import ch.uepaa.p2pkit.messaging.MessageListener;
-import me.sixhackathon.bumppay.util.AsyncMessageRunner;
-import me.sixhackathon.bumppay.util.BumpDetector;
-import me.sixhackathon.bumppay.util.OnBumpListener;
 
 public class MainActivity extends BumpActivity {
 
