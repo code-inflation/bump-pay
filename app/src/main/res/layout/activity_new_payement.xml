@@ -8,20 +8,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="me.sixhackathon.bumppay.NewPayementActivity">
-
+    tools:context="me.sixhackathon.bumppay.NewPayementActivity"
+    android:background="@color/common_action_bar_splitter">
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Amount to Pay is"
+        android:fontFamily="@string/auth_google_play_services_client_google_display_name"
+        android:textSize="26dp"
+        android:id="@+id/textViewToPayLabel"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:fontFamily="@string/auth_google_play_services_client_google_display_name"
+        android:textSize="45dp"
+        android:id="@+id/textViewToPay"
+        android:layout_above="@+id/b"
+        android:layout_toEndOf="@+id/buttonCancel"
+        android:layout_marginBottom="28dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="113dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="bump to pay"
+        android:fontFamily="@string/auth_google_play_services_client_google_display_name"
+        android:textSize="30dp"
         android:textAlignment="viewEnd"
-        android:layout_marginRight="10dp"
         android:id="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/b" />
+        android:layout_below="@+id/textViewToPayLabel"
+        android:layout_toStartOf="@+id/b" />
 
     <Spinner
         android:id="@+id/b"
@@ -30,7 +55,7 @@
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dialog"
         android:layout_alignTop="@+id/textView"
-        android:layout_toStartOf="@+id/textViewCHF" />
+        android:layout_toStartOf="@+id/buttonDone" />
 
 
     <TextView
@@ -38,28 +63,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="CHF"
+        android:fontFamily="@string/auth_google_play_services_client_google_display_name"
+        android:textSize="30dp"
         android:id="@+id/textViewCHF"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/b"
+        android:layout_toEndOf="@+id/b" />
 
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Amount to Pay is"
-        android:id="@+id/textViewToPayLabel"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/b"
-        android:layout_toEndOf="@+id/buttonCancel" />
 
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/textViewToPay"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/buttonDone" />
 
     <Button
         android:layout_width="wrap_content"
