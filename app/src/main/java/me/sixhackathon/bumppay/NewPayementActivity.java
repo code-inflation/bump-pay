@@ -1,7 +1,9 @@
 package me.sixhackathon.bumppay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import me.sixhackathon.bumppay.restlayer.PaymentManager;
 
@@ -51,6 +54,13 @@ public class NewPayementActivity extends BumpActivity {
                 // handle payment
                 PaymentManager.pay(numberOfReceiver, amountToPay);
                 Log.i(NewPayementActivity.class.toString(), "Paying " + amountToPay + " CHF to " + numberOfReceiver);
+
+                Context context = getApplicationContext();
+                CharSequence text = "You just successfully paid"+ amountToPay + " CHF";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
                 // go back to main activity
                 finish();
