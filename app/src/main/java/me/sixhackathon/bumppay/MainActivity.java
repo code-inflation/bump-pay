@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private BumpDetector bumpDetector;
     private Sensor accelerometer;
+
+    private boolean accepting = false;
 
     private Set<Peer> peers = new HashSet<>();
 
@@ -110,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onMessageReceived(final long timestamp, final UUID origin, final String type, final byte[] message) {
             Log.i(MainActivity.class.toString(), "MessageListener | Message received: From=" + origin + " type=" + type + " message=" + new String(message));
+            if (accepting){
+                Log.i(MainActivity.class.toString(), "Accepting payment from " + origin);
+                accepting = false;
+            }
         }
     };
 
@@ -135,13 +142,16 @@ public class MainActivity extends AppCompatActivity {
         bumpDetector = new BumpDetector(new OnBumpListener() {
             @Override
             public void onBump() {
-                Peer bumpedPeer = findResponsiblePeer();
+                messagePeers();
                 //Log.i(MainActivity.class.toString(), "Bumped with Peer: " + bumpedPeer.getNodeId());
             }
         });
     }
 
-    private Peer findResponsiblePeer(){
+    private Peer messagePeers(){
+
+        accepting = true;
+
         for (Peer peer : peers) {
             // TODO send message to all connected peers
             try {
@@ -152,7 +162,16 @@ public class MainActivity extends AppCompatActivity {
             } catch (MessageTooLargeException e) {
                 e.printStackTrace();
             }
+            new AsyncMessageRunner(peer, getApplicationContext()).execute();
         }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Actions to do after 10 seconds
+                accepting = false;
+            }
+        }, 10000);
 
         // TODO wait for message of other peer
 
