@@ -22,16 +22,6 @@ import me.sixhackathon.bumppay.restlayer.UserManager;
 
 public class MainActivity extends BumpActivity {
 
-    private int purse = 0;
-
-    public int getPurse() {
-        return purse;
-    }
-
-    public void setPurse(int purse) {
-        this.purse = purse;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,11 +82,11 @@ public class MainActivity extends BumpActivity {
 
     private void updateBalanceUI() {
         if(UserManager.isLoggedIn()){
-            purse = BalanceManager.getBalance();
+            BalanceManager.loadBalance();
         }
         TextView purseContent = (TextView) findViewById(R.id.purseView);
         DecimalFormat df = new DecimalFormat("0.00");
-        purseContent.setText(df.format(this.getPurse()));
+        purseContent.setText(df.format(BalanceManager.getBalance()));
     }
 
     @Override

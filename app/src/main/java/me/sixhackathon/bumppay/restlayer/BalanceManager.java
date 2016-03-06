@@ -10,11 +10,14 @@ public class BalanceManager {
 
     private static int balance = 0;
 
+    public static int  getBalance(){
+        return balance;
+    }
     /**
      * get the vault balance of the current user
      * @return current vault amount
      */
-    public  static int getBalance(){
+    public  static void loadBalance(){
 
         PaymitAPIInterface client = ServiceGenerator.createService(PaymitAPIInterface.class);
 
@@ -33,7 +36,5 @@ public class BalanceManager {
                 // Log error here since request failed
             }
         });
-
-        return balance;
     }
 }
