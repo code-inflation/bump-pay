@@ -88,16 +88,18 @@ public class MainActivity extends BumpActivity {
 
         if(UserManager.isLoggedIn()){
             BalanceManager.loadBalance();
-            int purseInt = (int)Double.parseDouble(purseContent.getText().toString());
-            if (purseInt != 0 && BalanceManager.getBalance() > purseInt){
+            if (!purseContent.getText().toString().equals("")){
+                int purseInt = (int)Double.parseDouble(purseContent.getText().toString());
+                if (purseInt != 0 && BalanceManager.getBalance() > purseInt){
 
-                int delta = BalanceManager.getBalance() - purseInt;
+                    int delta = BalanceManager.getBalance() - purseInt;
 
-                CharSequence text = "You just received "+ delta + " CHF";
-                int duration = Toast.LENGTH_SHORT;
+                    CharSequence text = "You just received "+ delta + " CHF";
+                    int duration = Toast.LENGTH_LONG;
 
-                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-                toast.show();
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                }
             }
         }
 
