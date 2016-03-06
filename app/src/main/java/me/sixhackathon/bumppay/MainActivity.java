@@ -1,5 +1,6 @@
 package me.sixhackathon.bumppay;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -82,10 +84,23 @@ public class MainActivity extends BumpActivity {
     }
 
     private void updateBalanceUI() {
+        TextView purseContent = (TextView) findViewById(R.id.purseView);
+
         if(UserManager.isLoggedIn()){
             BalanceManager.loadBalance();
+            int purseInt = (int)Double.parseDouble(purseContent.getText().toString());
+            if (purseInt != 0 && BalanceManager.getBalance() > purseInt){
+
+                int delta = BalanceManager.getBalance() - purseInt;
+
+                CharSequence text = "You just received "+ delta + " CHF";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                toast.show();
+            }
         }
-        TextView purseContent = (TextView) findViewById(R.id.purseView);
+
         DecimalFormat df = new DecimalFormat("0.00", new DecimalFormatSymbols(Locale.ENGLISH));
         purseContent.setText(df.format(BalanceManager.getBalance()));
     }
