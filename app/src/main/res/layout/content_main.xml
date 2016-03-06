@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="new payement"
+        android:text="new payment"
         android:id="@+id/textView"
         android:layout_alignTop="@+id/add"
         android:layout_centerHorizontal="true"
