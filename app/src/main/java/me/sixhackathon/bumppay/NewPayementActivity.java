@@ -25,7 +25,7 @@ public class NewPayementActivity extends BumpActivity {
 
         Spinner dropdown = (Spinner)findViewById(R.id.b);
 
-        String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        String[] items = new String[]{"1", "5", "10", "25", "50"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
