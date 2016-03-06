@@ -23,17 +23,21 @@ public class NewPayementActivity extends BumpActivity {
         TextView textViewToPayLabel = (TextView)findViewById(R.id.textViewToPayLabel);
         textViewToPayLabel.setVisibility(View.GONE);
 
-        Spinner dropdown = (Spinner)findViewById(R.id.b);
+        Spinner mSpinner = (Spinner)findViewById(R.id.b);
 
         String[] items = new String[]{"1", "5", "10", "25", "50"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+        mSpinner.setAdapter(adapter);
+
+        int spinnerPosition = adapter.getPosition("5");
+        mSpinner.setSelection(spinnerPosition);
+
 
         // initialize p2pkit and bump detection
         enableP2PKit();
-        initializeBumpDetection(Integer.parseInt(dropdown.getSelectedItem().toString()));
+        initializeBumpDetection(Integer.parseInt(mSpinner.getSelectedItem().toString()));
 
-        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Spinner dropdown = (Spinner)findViewById(R.id.b);
