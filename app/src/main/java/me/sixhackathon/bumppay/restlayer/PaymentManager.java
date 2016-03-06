@@ -2,7 +2,6 @@ package me.sixhackathon.bumppay.restlayer;
 
 import me.sixhackathon.bumppay.paymitObjects.SendMoney;
 import me.sixhackathon.bumppay.paymitObjects.Transaction;
-import me.sixhackathon.bumppay.paymitObjects.TransactionInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,8 +45,8 @@ public class PaymentManager {
         });
     }
 
-    public static TransactionInfo getTransactionInfo(String TransactionID) {
-        TransactionInfo info = new TransactionInfo();
-        return info;
+    public static Transaction getTransactionInfo(String TransactionID) {
+
+        return null;
     }
 }
