@@ -3,7 +3,6 @@ package me.sixhackathon.bumppay.restlayer;
 
 import me.sixhackathon.bumppay.paymitObjects.LogInBody;
 import me.sixhackathon.bumppay.paymitObjects.SignInBody;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

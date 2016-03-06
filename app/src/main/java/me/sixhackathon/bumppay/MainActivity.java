@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import ch.uepaa.p2pkit.P2PKitClient;
 import ch.uepaa.p2pkit.discovery.InfoTooLongException;
@@ -55,7 +57,6 @@ public class MainActivity extends BumpActivity {
     private void showPhonenrDialog() {
         final EditText txtPhoneNumber = new EditText(this);
 
-        // Set the default text to a link of the Queen
         txtPhoneNumber.setText("+41796550243");
 
         new AlertDialog.Builder(this)
@@ -85,7 +86,7 @@ public class MainActivity extends BumpActivity {
             BalanceManager.loadBalance();
         }
         TextView purseContent = (TextView) findViewById(R.id.purseView);
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat("0.00", new DecimalFormatSymbols(Locale.ENGLISH));
         purseContent.setText(df.format(BalanceManager.getBalance()));
     }
 
