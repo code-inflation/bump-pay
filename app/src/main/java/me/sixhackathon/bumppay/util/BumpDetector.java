@@ -11,13 +11,13 @@ import android.util.Log;
 public class BumpDetector implements SensorEventListener {
 
     // Minimum acceleration needed to count as a shake movement
-    private static final int MIN_BUMP_ACCELERATION = 3;
+    private static final int MIN_BUMP_ACCELERATION = 2;
 
     // Start time for the bump detection
     long startTime = 0;
 
     // Minimum delay between individual bumps in millis
-    private static final long BUMP_DELAY = 200;
+    private static final long BUMP_DELAY = 300;
 
     // Arrays to store gravity and linear acceleration values
     private float[] mGravity = { 0.0f, 0.0f, 0.0f };
